@@ -228,8 +228,8 @@ def enqueue_query(query, data_source, scheduled=False, metadata={}):
                     queue_name = data_source.scheduled_queue_name
                 else:
                     queue_name = data_source.queue_name
-
-                result = execute_query.apply_async(args=(query, data_source.id, metadata), queue=queue_name)
+                logging.info("task require queue [%s]", queue_name)
+                result = execute_query.apply_async(args=(query, data_source.id, metadata))
                 job = QueryTask(async_result=result)
                 tracker = QueryTaskTracker.create(result.id, 'created', query_hash, data_source.id, scheduled, metadata)
                 tracker.save(connection=pipe)

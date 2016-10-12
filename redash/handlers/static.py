@@ -1,3 +1,6 @@
+#! usr/bin/env python
+# encoding: utf-8
+
 import os
 import hashlib
 import json
@@ -32,7 +35,9 @@ def send_static(filename):
 @login_required
 def index(**kwargs):
     email_md5 = hashlib.md5(current_user.email.lower()).hexdigest()
-    gravatar_url = "https://www.gravatar.com/avatar/%s?s=40" % email_md5
+    email_md5 = 'katongxiaodongwu_%02d.png' % (int(email_md5,16) % 23 + 1)
+    #gravatar_url = "https://www.gravatar.com/avatar/%s?s=40" % email_md5
+    gravatar_url = "/images/face/%s" % email_md5
 
     user = {
         'gravatar_url': gravatar_url,

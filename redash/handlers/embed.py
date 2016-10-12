@@ -68,6 +68,7 @@ def run_query_sync(data_source, parameter_values, query_text, max_age=0):
 @routes.route(org_scoped_rule('/embed/query/<query_id>/visualization/<visualization_id>'), methods=['GET'])
 @login_required
 def embed(query_id, visualization_id, org_slug=None):
+    abort(404, message="Unable to get query for this embed")
     query = models.Query.get_by_id_and_org(query_id, current_org)
     require_access(query.groups, current_user, view_only)
     vis = query.visualizations.where(models.Visualization.id == visualization_id).first()
@@ -123,6 +124,7 @@ def embed(query_id, visualization_id, org_slug=None):
 @routes.route(org_scoped_rule('/public/dashboards/<token>'), methods=['GET'])
 @login_required
 def public_dashboard(token, org_slug=None):
+    abort(400, message="no dashboards")
     # TODO: verify object is a dashboard?
     if not isinstance(current_user, models.ApiUser):
         api_key = get_object_or_404(models.ApiKey.get_by_api_key, token)

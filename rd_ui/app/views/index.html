@@ -2,11 +2,11 @@
 
   <div class="tile m-t-10 m-b-5">
     <div class="t-body p-5">
-      <a href="queries/new" ng-show="currentUser.hasPermission('create_query')" class="btn btn-default">New Query</a>
+      <a href="queries/new" ng-show="currentUser.hasPermission('create_query')" class="btn btn-default">新建查询</a>
       <button ng-show="currentUser.hasPermission('create_dashboard')" type="button" class="btn btn-default"
-              data-toggle="modal" href="#new_dashboard_dialog">New Dashboard
+              data-toggle="modal" href="#new_dashboard_dialog">新建看板
       </button>
-      <a href="alerts/new" class="btn btn-default">New Alert</a>
+      <a href="alerts/new" class="btn btn-default">新建告警</a>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
     <div class="t-body tb-padding">
       <div class="row">
           <div class="col-md-6">
-            <p class="f-500 m-b-20 c-black">Recent Dashboards</p>
+            <p class="f-500 m-b-20 c-black">最近访问看板</p>
             <div class="list-group">
               <a ng-href="dashboard/{{dashboard.slug}}" class="list-group-item" ng-repeat="dashboard in recentDashboards">
                 {{dashboard.name}}
@@ -23,7 +23,7 @@
           </div>
 
           <div class="col-md-6">
-            <p class="f-500 m-b-20 c-black">Recent Queries</p>
+            <p class="f-500 m-b-20 c-black">最近访问查询</p>
             <div class="list-group">
               <a ng-href="queries/{{query.id}}" class="list-group-item"
                  ng-repeat="query in recentQueries">{{query.name}}</a>

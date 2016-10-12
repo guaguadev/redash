@@ -305,7 +305,11 @@ class User(ModelTimestampsMixin, BaseModel, BelongsToOrgMixin, UserMixin, Permis
     @property
     def gravatar_url(self):
         email_md5 = hashlib.md5(self.email.lower()).hexdigest()
-        return "https://www.gravatar.com/avatar/%s?s=40" % email_md5
+	email_md5 = 'katongxiaodongwu_%02d.png' % (int(email_md5,16) % 23 + 1)
+	#gravatar_url = "https://www.gravatar.com/avatar/%s?s=40" % email_md5
+        gravatar_url = "/images/face/%s" % email_md5
+
+        return gravatar_url
 
     @property
     def permissions(self):

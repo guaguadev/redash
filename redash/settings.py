@@ -226,3 +226,7 @@ COMMON_CLIENT_CONFIG = {
     'mailSettingsMissing': MAIL_DEFAULT_SENDER is None,
     'logoUrl': LOGO_URL
 }
+DATETIME_FORMAT = 'y/m/d H:i:s'
+TIME_FORMAT = 'H:i'
+DATE_FORMAT = 'y/m/d'
+
