@@ -6,6 +6,6 @@ if __name__ == '__main__':
 
     with db.database.transaction():
         migrate(
-            migrator.add_column('user', 'active', User.active),
-            migrator.add_column('user', 'gg_args', User.gg_args),
+            migrator.add_column('users', 'active', User.active),
+            migrator.add_column('users', 'gg_args', User.gg_args),
         )
