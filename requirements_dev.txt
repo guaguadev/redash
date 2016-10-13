@@ -6,3 +6,7 @@ flask_mail
 psycopg2
 flask-login
 peewee
+flask_restful
+semver
+flask_oauthlib
+saml2
