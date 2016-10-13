@@ -52,7 +52,7 @@ def all_settings():
     return settings
 
 
-NAME = os.environ.get('REDASH_NAME', 'Redash')..decode('utf8')
+NAME = os.environ.get('REDASH_NAME', 'Redash').decode('utf8')
 LOGO_URL = os.environ.get('REDASH_LOGO_URL', '/images/redash_icon_small.png')
 
 REDIS_URL = os.environ.get('REDASH_REDIS_URL', os.environ.get('REDIS_URL', "redis://localhost:6379/0"))
