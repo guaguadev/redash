@@ -45,7 +45,9 @@ def index(**kwargs):
         'name': current_user.name,
         'email': current_user.email,
         'groups': current_user.groups,
-        'permissions': current_user.permissions
+        'permissions': current_user.permissions,
+        'gg_args': current_user.gg_args,
+        'active': current_user.active
     }
 
     client_config = {
