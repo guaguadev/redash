@@ -55,7 +55,7 @@
         </div>
         <button type="submit" class="btn btn-default"><span class="zmdi zmdi-search"></span></button>
       </form>
-      <div ng-show="currentUser.gg_args">
+      <div ng-show="currentUser.gg_args" class="navbar-form navbar-right">
         <select ng-model="selectCity" ng-change="selectMaster" ng-options="city.name for city in currentUser.gg_args.cities">
           <option value="">---选择--</option>
         </select>
