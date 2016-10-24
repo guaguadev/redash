@@ -55,6 +55,14 @@
         </div>
         <button type="submit" class="btn btn-default"><span class="zmdi zmdi-search"></span></button>
       </form>
+      <div ng-show="currentUser.gg_args">
+        <select ng-model="selectCity" ng-change="selectMaster" ng-options="city.name for city in currentUser.gg_args.cities">
+          <option value="">---选择--</option>
+        </select>
+        <select ng-model="selectMaster" ng-options="master.name for master in selectCity.masters">
+          <option value="">---选择--</option>
+        </select>
+      </div>
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="currentUser.hasPermission('admin')">
           <a href="data_sources" title="Data Sources"><i class="fa fa-database"></i></a>
