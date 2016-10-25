@@ -105,7 +105,7 @@ def login(org_slug=None):
                     login_user(user, remember=remember)
                     return redirect(next_path)
                 else:
-                    flash("用户已失效！")
+                    flash("User expired!")
             else:
                 flash("Wrong email or password.")
         except models.User.DoesNotExist:

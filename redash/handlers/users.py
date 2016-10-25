@@ -25,7 +25,7 @@ def requestUserByEmail(email):
         content = url.read()
         return json.loads(content)
     except Exception as e:
-        return {'code': -1, 'message': u'用户信息查询失败'}
+        return {'code': -1, 'message': u'User info query failed.'}
 
 class UserListResource(BaseResource):
     @require_permission('list_users')
