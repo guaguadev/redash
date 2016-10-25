@@ -100,9 +100,12 @@ def login(org_slug=None):
         try:
             user = models.User.get_by_email_and_org(request.form['email'], current_org.id)
             if user and user.verify_password(request.form['password']):
-                remember = ('remember' in request.form)
-                login_user(user, remember=remember)
-                return redirect(next_path)
+                if user.active:
+                    remember = ('remember' in request.form)
+                    login_user(user, remember=remember)
+                    return redirect(next_path)
+                else:
+                    flash("用户已失效！")
             else:
                 flash("Wrong email or password.")
         except models.User.DoesNotExist:

@@ -3,6 +3,8 @@ from flask import request
 from flask_restful import abort
 from funcy import project
 from peewee import IntegrityError
+import urllib2
+import json
 
 from redash import models
 from redash.permissions import require_permission, require_admin_or_owner, is_admin_or_owner, \
@@ -17,6 +19,13 @@ def invite_user(org, inviter, user):
     send_invite_email(inviter, user, invite_url, org)
     return invite_url
 
+def requestUserByEmail(email):
+    try:
+        url = urllib2.urlopen('http://slapi.guaguaxiche.com/slapi/redash/getuserbyemail?email=%s' % email)
+        content = url.read()
+        return json.loads(content)
+    except Exception as e:
+        return {'code': -1, 'message': u'用户信息查询失败'}
 
 class UserListResource(BaseResource):
     @require_permission('list_users')
@@ -34,6 +43,13 @@ class UserListResource(BaseResource):
                            groups=[self.current_org.default_group.id])
 
         try:
+            userinfo = requestUserByEmail(req['email'])
+            if userinfo['code'] != 0:
+                abort(400, message=userinfo['message'])
+            else:
+                user.active = True
+                user.name = userinfo['username']
+                user.gg_args = {'cities': userinfo.cities}
             user.save()
         except IntegrityError as e:
             if "email" in e.message:
