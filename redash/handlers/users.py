@@ -35,10 +35,11 @@ class UserListResource(BaseResource):
     @require_admin
     def post(self):
         req = request.get_json(force=True)
-        require_fields(req, ('name', 'email'))
+        # require_fields(req, ('name', 'email'))
+        require_fields(req, ('email', ))
 
         user = models.User(org=self.current_org,
-                           name=req['name'],
+                           # name=req['name'],
                            email=req['email'],
                            groups=[self.current_org.default_group.id])
 
