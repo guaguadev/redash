@@ -663,13 +663,15 @@
       var params = this.get();
       var names = _.pluck(params, 'name');
       var values = _.pluck(params, 'value');
-      _.each(this.query.options.paramnames, function(name) {
-        var value = Query.commonParams[name];
-        if (value) {
-          names.push(name);
-          values.push(value);
-        }
-      });
+      if (Query.commonParams) {
+        _.each(this.query.options.paramnames, function(name) {
+          var value = Query.commonParams[name];
+          if (value) {
+            names.push(name);
+            values.push(value);
+          }
+        });
+      }
       return _.object(names, values);
     }
 
