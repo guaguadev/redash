@@ -607,6 +607,7 @@
         var parameterNames = this.parseQuery();
 
         this.query.options.parameters = this.query.options.parameters || [];
+        this.query.options.paramnames = parameterNames;
 
         var parametersMap = {};
         _.each(this.query.options.parameters, function(param) {
@@ -653,7 +654,9 @@
     }
 
     Parameters.prototype.isRequired = function() {
-      return !_.isEmpty(this.get());
+      // return !_.isEmpty(this.get());
+      this.updateParameters();
+      return !_.isEmpty(this.query.options.paramnames);
     }
 
     Parameters.prototype.getValues = function() {

@@ -90,10 +90,10 @@
       </ul>
 
       <div ng-show="currentUser.gg_args.cities" class="navbar-form navbar-right">
-        <select ng-model="selectCity" ng-change="selectMaster" ng-options="city.name for city in currentUser.gg_args.cities">
+        <select ng-model="selectCity" ng-change="selectMaster" ng-options="city.name for city in currentUser.gg_args.cities track by city.id">
           <option value="">---选择--</option>
         </select>
-        <select ng-model="selectMaster" ng-options="master.name for master in selectCity.masters">
+        <select ng-model="selectMaster" ng-change="selectChange();" ng-options="master.name for master in selectCity.masters track by master.id">
           <option value="">---选择--</option>
         </select>
       </div>

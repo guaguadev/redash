@@ -30,6 +30,10 @@
           $location.path('/queries/search').search({q: $scope.term});
         };
 
+        $scope.selectChange = function() {
+          console.log($scope.selectCity);
+        }
+
         $scope.reloadDashboards();
 
         $scope.currentUser = currentUser;
