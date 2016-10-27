@@ -51,6 +51,10 @@
             Query.commonParams['MASTERID'] = $scope.selectMaster.id;
           }
         }
+
+        //默认选择第一列
+        $scope.selectCity = $scope.currentUser.gg_args.cities[0];
+        $scope.selectMaster = $scope.selectCity.masters[0];
       }
     }
   }]);
