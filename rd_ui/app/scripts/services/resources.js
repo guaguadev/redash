@@ -656,26 +656,6 @@
       return !_.isEmpty(this.get());
     }
 
-    Parameters.prototype._object(list, values) {
-        if (list == null) return {};
-        var result = {};
-        var key = undefined, value = undefined;
-
-        for (var i = 0, l = list.length; i < l; i++) {
-          if (values) {
-            key = list[i];
-            value = values[i];
-          } else {
-            key = list[i][0];
-            values = list[i][1];
-          }
-          if (key !== 'CITYID' && key !== 'MASTERID') {
-            result[key] = value;
-          }
-        }
-        return result;
-    }
-
     Parameters.prototype.getValues = function() {
       var params = this.get();
       return _.object(_.pluck(params, 'name'), _.pluck(params, 'value'));
