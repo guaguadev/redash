@@ -242,7 +242,7 @@
       $scope.queryResult = $scope.query.getQueryResult(maxAge);
     };
 
-    $scope.on('update-common-params', function() {
+    $scope.$on('update-common-params', function() {
       $scope.reload();
     });
 
