@@ -3,7 +3,7 @@
 
   var directives = angular.module('redash.directives', []);
 
-  directives.directive('appHeader', ['$location', 'Dashboard', 'notifications', function ($location, Dashboard) {
+  directives.directive('appHeader', ['$location', 'Dashboard', 'Query', 'notifications', function ($location, Dashboard, Query) {
     return {
       restrict: 'E',
       replace: true,
@@ -30,20 +30,25 @@
           $location.path('/queries/search').search({q: $scope.term});
         };
 
-        $scope.selectChange = function() {
-          console.log($scope.selectCity);
-        }
-
         $scope.reloadDashboards();
 
         $scope.currentUser = currentUser;
 
         $scope.$watch('selectCity', function(newValue, oldValue, scope) {
-          console.log(newValue);
+          scope.selectMaster = undefined;
         });
-        $scope.$watch('selectMaster', function(newValue, oldValue, scope) {
-          console.log(newValue);
-        });
+
+        $scope.selectMasterChange = function() {
+          console.log($scope.selectCity);
+
+          if ($scope.selectMaster !== undefined) {
+            //?重新查询
+            Query.commonParams = [
+                {name: 'CITYID', value: $scope.selectCity.id},
+                {name: 'MASTERID', value: $scope.selectMaster.id},
+            ];
+          }
+        }
       }
     }
   }]);

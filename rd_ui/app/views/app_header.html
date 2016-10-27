@@ -93,7 +93,7 @@
         <select ng-model="selectCity" ng-change="selectMaster" ng-options="city.name for city in currentUser.gg_args.cities track by city.id">
           <option value="">---选择--</option>
         </select>
-        <select ng-model="selectMaster" ng-options="master.name for master in selectCity.masters track by master.id">
+        <select ng-model="selectMaster" ng-change="selectMasterChange()" ng-options="master.name for master in selectCity.masters track by master.id">
           <option value="">---选择--</option>
         </select>
       </div>

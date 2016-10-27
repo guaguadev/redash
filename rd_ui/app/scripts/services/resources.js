@@ -661,7 +661,16 @@
 
     Parameters.prototype.getValues = function() {
       var params = this.get();
-      return _.object(_.pluck(params, 'name'), _.pluck(params, 'value'));
+      var names = _.pluck(params, 'name');
+      var values = _.pluck(params, 'value');
+      var paramnames = this.query.options.paramnames;
+      _.each(Query.commonParams, function(param) {
+        if (paramnames.indexOf(param.name) >= 0) {
+          names.push(param.name);
+          values.push(param.value);
+        }
+      });
+      return _.object(names, values);
     }
 
     Query.prototype.getParameters = function() {
