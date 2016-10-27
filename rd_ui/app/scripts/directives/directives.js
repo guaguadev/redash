@@ -35,21 +35,18 @@
         $scope.currentUser = currentUser;
 
         $scope.$watch('selectCity', function(newValue, oldValue, scope) {
-          scope.selectMaster = undefined;
-          if (newValue !== undefined) {
-            //?重新查询
-            Query.commonParams = { CITYID: $scope.selectCity.id };
-          }
+          if (newValue === oldValue) return;
+
+          scope.selectMaster = newValue.masters[0];
+          //?重新查询
+          Query.commonParams = { CITYID: scope.selectCity.id, MASTERID: scope.selectMaster.id };
+          $scope.$broadcast('update-common-params');
         });
 
         $scope.selectMasterChange = function() {
-          console.log($scope.selectCity);
-
-          if ($scope.selectMaster !== undefined) {
-            //?重新查询
-            Query.commonParams = Query.commonParams || {};
-            Query.commonParams['MASTERID'] = $scope.selectMaster.id;
-          }
+          //?重新查询
+          Query.commonParams = { CITYID: $scope.selectCity.id, MASTERID: $scope.selectMaster.id };
+          $scope.$broadcast('update-common-params');
         }
 
         //默认选择第一列
