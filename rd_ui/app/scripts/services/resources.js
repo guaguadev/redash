@@ -615,12 +615,14 @@
 
         _.each(parameterNames, function(param) {
           if (!_.has(parametersMap, param)) {
-            this.query.options.parameters.push({
-              'title': param,
-              'name': param,
-              'type': 'text',
-              'value': null
-            });
+            if (key !== 'CITYID' && key !== 'MASTERID') {
+              this.query.options.parameters.push({
+                'title': param,
+                'name': param,
+                'type': 'text',
+                'value': null
+              });
+            }
           }
         }.bind(this));
 
@@ -652,6 +654,26 @@
 
     Parameters.prototype.isRequired = function() {
       return !_.isEmpty(this.get());
+    }
+
+    Parameters.prototype._object(list, values) {
+        if (list == null) return {};
+        var result = {};
+        var key = undefined, value = undefined;
+
+        for (var i = 0, l = list.length; i < l; i++) {
+          if (values) {
+            key = list[i];
+            value = values[i];
+          } else {
+            key = list[i][0];
+            values = list[i][1];
+          }
+          if (key !== 'CITYID' && key !== 'MASTERID') {
+            result[key] = value;
+          }
+        }
+        return result;
     }
 
     Parameters.prototype.getValues = function() {

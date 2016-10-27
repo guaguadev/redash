@@ -173,7 +173,7 @@
           };
 
           $scope.searchQueries = function (term) {
-            if (!term || term.length < 3) {
+            if (!term || term.length < 2) {
               return;
             }
 
