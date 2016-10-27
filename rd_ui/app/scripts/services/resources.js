@@ -663,9 +663,8 @@
       var params = this.get();
       var names = _.pluck(params, 'name');
       var values = _.pluck(params, 'value');
-      var paramnames = this.query.options.paramnames;
-      _.each(Query.commonParams, function(param) {
-        if (paramnames.indexOf(param.name) >= 0) {
+      _.each(this.query.options.paramnames, function(name) {
+        if (Query.commonParams[name]) {
           names.push(param.name);
           values.push(param.value);
         }

@@ -36,6 +36,10 @@
 
         $scope.$watch('selectCity', function(newValue, oldValue, scope) {
           scope.selectMaster = undefined;
+          if (newValue !== undefined) {
+            //?重新查询
+            Query.commonParams = { CITYID: $scope.selectCity.id };
+          }
         });
 
         $scope.selectMasterChange = function() {
@@ -43,10 +47,8 @@
 
           if ($scope.selectMaster !== undefined) {
             //?重新查询
-            Query.commonParams = [
-                {name: 'CITYID', value: $scope.selectCity.id},
-                {name: 'MASTERID', value: $scope.selectMaster.id},
-            ];
+            Query.commonParams = Query.commonParams || {};
+            Query.commonParams['MASTERID'] = $scope.selectMaster.id;
           }
         }
       }
