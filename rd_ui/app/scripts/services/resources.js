@@ -615,7 +615,7 @@
 
         _.each(parameterNames, function(param) {
           if (!_.has(parametersMap, param)) {
-            if (key !== 'CITYID' && key !== 'MASTERID') {
+            if (param !== 'CITYID' && param !== 'MASTERID') {
               this.query.options.parameters.push({
                 'title': param,
                 'name': param,
