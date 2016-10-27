@@ -37,6 +37,13 @@
         $scope.reloadDashboards();
 
         $scope.currentUser = currentUser;
+
+        $scope.$watch('selectCity', function(newValue, oldValue, scope) {
+          console.log(newValue);
+        });
+        $scope.$watch('selectMaster', function(newValue, oldValue, scope) {
+          console.log(newValue);
+        });
       }
     }
   }]);
