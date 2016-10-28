@@ -45,12 +45,12 @@ class UserListResource(BaseResource):
 
         try:
             userinfo = requestUserByEmail(req['email'])
-            if userinfo['code'] != 0:
-                abort(400, message=userinfo['message'])
-            else:
+            if userinfo['code'] == 0:
                 user.active = True
                 user.name = userinfo['username']
                 user.gg_args = {'cities': userinfo.cities}
+            else:
+                abort(400, message=userinfo['message'])
             user.save()
         except IntegrityError as e:
             if "email" in e.message:

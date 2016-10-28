@@ -35,7 +35,7 @@ class require_permissions(object):
     def __call__(self, fn):
         @functools.wraps(fn)
         def decorated(*args, **kwargs):
-            has_permissions = current_user.has_permissions(self.permissions) and current_user.active
+            has_permissions = current_user.active and current_user.has_permissions(self.permissions)
 
             if has_permissions:
                 return fn(*args, **kwargs)
