@@ -38,13 +38,14 @@ class UserListResource(BaseResource):
         # require_fields(req, ('name', 'email'))
         require_fields(req, ('email', ))
 
+        email = req['email'] if req['email'].index('@') >= 0 else '%s@guaguaxiche.com' % req['email']
         user = models.User(org=self.current_org,
                            # name=req['name'],
-                           email=req['email'],
+                           email=email,
                            groups=[self.current_org.default_group.id])
 
         try:
-            userinfo = requestUserByEmail(req['email'])
+            userinfo = requestUserByEmail(email)
             if userinfo['code'] == 0:
                 user.active = True
                 user.name = userinfo['username']
