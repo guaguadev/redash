@@ -1,5 +1,6 @@
 import requests
 from celery.utils.log import get_task_logger
+from celery.schedules import crontab
 from flask.ext.mail import Message
 from redash.worker import celery
 from redash.version_check import run_version_check
@@ -42,3 +43,22 @@ def send_mail(to, subject, html, text):
             mail.send(message)
     except Exception:
         logger.exception('Failed sending message: %s', message.subject)
+
+
+@celery.task(run_every=crontab(minute="0", hour="18"), base=BaseTask)
+def check_users_info(query_id):
+    from redash import models
+    from redash.authentication.org_resolving import current_org
+    from redash.handlers.users import requestUserByEmail
+
+    users = models.User.all(current_org)
+    for user in users:
+        userinfo = requestUserByEmail(user.email)
+        if userinfo['code'] == 0:
+            user.active = True # userinfo['active']
+            user.name = userinfo['username']
+            user.gg_args = {'cities': userinfo.cities}
+        else:
+            user.active = False
+        user.save()
+
