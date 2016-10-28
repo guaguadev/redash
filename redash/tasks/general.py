@@ -57,7 +57,7 @@ def check_users_info(query_id):
         if userinfo['code'] == 0:
             user.active = True # userinfo['active']
             user.name = userinfo['username']
-            user.gg_args = {'cities': userinfo.cities}
+            user.gg_args = {'cities': userinfo['cities']}
         else:
             user.active = False
         user.save()

@@ -328,6 +328,10 @@
             return;
           }
 
+          if ($scope.user.email.indexOf('@') < 0) {
+            $scope.user.email = $scope.user.email + '@guaguaxiche.com';
+          }
+
           $scope.user.$save(function(user) {
             $scope.user = user;
             $scope.user.created = true;

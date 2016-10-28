@@ -48,7 +48,7 @@ class UserListResource(BaseResource):
             if userinfo['code'] == 0:
                 user.active = True
                 user.name = userinfo['username']
-                user.gg_args = {'cities': userinfo.cities}
+                user.gg_args = {'cities': userinfo['cities']}
             else:
                 abort(400, message=userinfo['message'])
             user.save()
