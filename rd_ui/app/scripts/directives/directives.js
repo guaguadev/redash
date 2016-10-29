@@ -39,13 +39,13 @@
 
           scope.selectMaster = newValue.masters[0];
           //?重新查询
-          Query.commonParams = { CITYID: scope.selectCity.id, MASTERID: scope.selectMaster.id };
+          Query.commonParams = {CITYID: {value: scope.selectCity.id, name: scope.selectCity.name}, MASTERID: {value: scope.selectMaster.id, name: scope.selectMaster.name}};
           $scope.$broadcast('update-common-params');
         });
 
         $scope.selectMasterChange = function() {
           //?重新查询
-          Query.commonParams = { CITYID: $scope.selectCity.id, MASTERID: $scope.selectMaster.id };
+          Query.commonParams = {CITYID: {value: $scope.selectCity.id, name: $scope.selectCity.name}, MASTERID: {value: $scope.selectMaster.id, name: $scope.selectMaster.name}};
           $scope.$broadcast('update-common-params');
         }
 

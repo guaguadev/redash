@@ -466,6 +466,7 @@
         options: {}
       });
     };
+    Query.commonParams = {}; // 默认值
 
     Query.prototype.getSourceLink = function () {
       return '/queries/' + this.id + '/source';
@@ -518,6 +519,7 @@
         // Need to clear latest results, to make sure we don't use results for different params.
         this.latest_query_data = null;
         this.latest_query_data_id = null;
+        this.displayname = Mustache.render(this.name, parameters.getNames());
       }
 
       if (this.latest_query_data && maxAge != 0) {
@@ -577,6 +579,7 @@
 
     var Parameters = function(query) {
       this.query = query;
+      this.query.displayname = query.name;
 
       this.parseQuery = function() {
         var parts = Mustache.parse(this.query.query);
@@ -616,7 +619,7 @@
 
         _.each(parameterNames, function(param) {
           if (!_.has(parametersMap, param)) {
-            if (param !== 'CITYID' && param !== 'MASTERID') {
+            if (Query.commonParams[param] === undefined) {
               this.query.options.parameters.push({
                 'title': param,
                 'name': param,
@@ -663,16 +666,22 @@
       var params = this.get();
       var names = _.pluck(params, 'name');
       var values = _.pluck(params, 'value');
-      if (Query.commonParams) {
-        _.each(this.query.options.paramnames, function(name) {
-          var value = Query.commonParams[name];
-          if (value) {
-            names.push(name);
-            values.push(value);
-          }
-        });
-      }
+      _.each(this.query.options.paramnames, function(name) {
+        var value = Query.commonParams[name];
+        if (value) {
+          names.push(name);
+          values.push(value);
+        }
+      });
       return _.object(names, values);
+    }
+
+    Parameters.prototype.getNames = function() {
+      var ret = {};
+      _.each(Query.commonParams, function(k, v) {
+        ret[k] = v.name;
+      });
+      return ret;
     }
 
     Query.prototype.getParameters = function() {
