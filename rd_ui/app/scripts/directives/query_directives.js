@@ -303,39 +303,39 @@
         $scope.refreshOptions = [
             {
                 value: "60",
-                name: 'Every minute'
+                name: '每分钟'
             }
         ];
 
         _.each([5, 10, 15, 30], function(i) {
           $scope.refreshOptions.push({
             value: String(i*60),
-            name: "Every " + i + " minutes"
+            name: "每" + i + "分钟"
           })
         });
 
         _.each(_.range(1, 13), function (i) {
             $scope.refreshOptions.push({
                 value: String(i * 3600),
-                name: 'Every ' + i + 'h'
+                name: '每' + i + '小时'
             });
         })
 
         $scope.refreshOptions.push({
             value: String(24 * 3600),
-            name: 'Every 24h'
+            name: '每24小时'
         });
         $scope.refreshOptions.push({
             value: String(7 * 24 * 3600),
-            name: 'Every 7 days'
+            name: '每7天'
         });
         $scope.refreshOptions.push({
           value: String(14 * 24 * 3600),
-          name: 'Every 14 days'
+          name: '每14天'
         });
         $scope.refreshOptions.push({
             value: String(30 * 24 * 3600),
-            name: 'Every 30 days'
+            name: '每30天'
         });
 
         $scope.$watch('refreshType', function() {

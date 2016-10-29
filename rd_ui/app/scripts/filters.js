@@ -3,16 +3,16 @@ var durationHumanize = function (duration) {
   if (duration == undefined) {
     humanized = "-";
   } else if (duration < 60) {
-    humanized = Math.round(duration) + "s";
+    humanized = Math.round(duration) + "秒";
   } else if (duration > 3600 * 24) {
     var days = Math.round(parseFloat(duration) / 60.0 / 60.0 / 24.0);
-    humanized = days + "days";
+    humanized = days + "天";
   } else if (duration >= 3600) {
     var hours = Math.round(parseFloat(duration) / 60.0 / 60.0);
-    humanized = hours + "h";
+    humanized = hours + "小时";
   } else {
     var minutes = Math.round(parseFloat(duration) / 60.0);
-    humanized = minutes + "m";
+    humanized = minutes + "分钟";
   }
   return humanized;
 };
