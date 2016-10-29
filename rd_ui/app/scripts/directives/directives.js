@@ -52,6 +52,7 @@
         //默认选择第一列
         $scope.selectCity = $scope.currentUser.gg_args.cities[0];
         $scope.selectMaster = $scope.selectCity.masters[0];
+        Query.commonParams = {CITYID: {value: scope.selectCity.id, name: scope.selectCity.name}, MASTERID: {value: scope.selectMaster.id, name: scope.selectMaster.name}};
       }
     }
   }]);

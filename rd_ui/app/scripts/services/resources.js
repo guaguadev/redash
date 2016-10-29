@@ -667,10 +667,10 @@
       var names = _.pluck(params, 'name');
       var values = _.pluck(params, 'value');
       _.each(this.query.options.paramnames, function(name) {
-        var value = Query.commonParams[name];
-        if (value) {
+        var param = Query.commonParams[name];
+        if (param) {
           names.push(name);
-          values.push(value);
+          values.push(param.value);
         }
       });
       return _.object(names, values);
