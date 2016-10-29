@@ -579,7 +579,6 @@
 
     var Parameters = function(query) {
       this.query = query;
-      this.query.displayname = query.name;
 
       this.parseQuery = function() {
         var parts = Mustache.parse(this.query.query);
