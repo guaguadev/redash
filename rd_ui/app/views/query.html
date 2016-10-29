@@ -175,26 +175,26 @@
         <li>
           <!-- runtime -->
           <span class="zmdi zmdi-timer"></span>
-          <span class="text-muted">Runtime </span>
+          <span class="text-muted">执行时间 </span>
           <strong ng-show="!queryExecuting">{{queryResult.getRuntime() | durationHumanize}}</strong>
           <span ng-show="queryExecuting">Running&hellip;</span>
         </li>
         <li>
           <!-- rows -->
           <span class="zmdi zmdi-format-align-justify"></span>
-          <span class="text-muted">Rows </span><strong>{{queryResult.getData().length}}</strong>
+          <span class="text-muted">记录条数 </span><strong>{{queryResult.getData().length}}</strong>
         </li>
         <li>
           <!-- refresh schedule -->
           <span class="zmdi zmdi-refresh"></span>
-          <span class="text-muted">Refresh Schedule</span>
+          <span class="text-muted">刷新间隔</span>
           <a ng-click="openScheduleForm()" ng-if="!query.isNew()">{{query.schedule | scheduleHumanize}}</a>
-          <span ng-if="query.isNew()">Never</span>
+          <span ng-if="query.isNew()">从不刷新</span>
         </li>
         <li>
           <!-- last update -->
           <span class="zmdi zmdi-time"></span>
-          <span class="text-muted">Last update </span>
+          <span class="text-muted">最后更新 </span>
           <strong>
             <rd-time-ago value="queryResult.query_result.retrieved_at"></rd-time-ago>
           </strong>
@@ -208,14 +208,14 @@
           <parameters parameters="query.getParametersDefs()" sync-values="!query.isNew()" editable="sourceMode && canEdit"></parameters>
           <!-- Query Execution Status -->
           <div class="alert alert-info" ng-show="queryResult.getStatus() == 'processing'">
-            Executing query&hellip;
+            执行查询&hellip;
             <rd-timer timestamp="queryResult.getUpdatedAt()"></rd-timer>
             <button type="button" class="btn btn-warning btn-xs pull-right" ng-disabled="cancelling"
                     ng-click="cancelExecution()">Cancel
             </button>
           </div>
           <div class="alert alert-info" ng-show="queryResult.getStatus() == 'waiting'">
-            Query in queue&hellip;
+            队列查询数&hellip;
             <rd-timer timestamp="queryResult.getUpdatedAt()"></rd-timer>
             <button type="button" class="btn btn-warning btn-xs pull-right" ng-disabled="cancelling"
                     ng-click="cancelExecution()">Cancel
@@ -224,7 +224,7 @@
           <div class="alert alert-danger" ng-show="queryResult.getError()">Error running query: <strong>{{queryResult.getError()}}</strong>
           </div>
           <div class="row log-container" ng-show="showLog">
-            <span ng-show="showLog">Log Information:</span>
+            <span ng-show="showLog">日志信息:</span>
             <table>
               <tbody>
               <tr ng-repeat="l in queryResult.getLog()">
