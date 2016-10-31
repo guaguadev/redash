@@ -677,7 +677,7 @@
 
     Parameters.prototype.getNames = function() {
       var ret = {};
-      _.each(Query.commonParams, function(k, v) {
+      _.each(Query.commonParams, function(v, k) {
         ret[k] = v.name;
       });
       return ret;
