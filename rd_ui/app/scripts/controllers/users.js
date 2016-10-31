@@ -34,11 +34,11 @@
           var newGroup = group.id === undefined;
 
           if (newGroup) {
-            $scope.saveButtonText = "Create";
-            $scope.title = "Create a New Group";
+            $scope.saveButtonText = "新建";
+            $scope.title = "新建一个用户组";
           } else {
-            $scope.saveButtonText = "Save";
-            $scope.title = "Edit Group";
+            $scope.saveButtonText = "保存";
+            $scope.title = "编辑用户组";
           }
 
           $scope.ok = function() {
@@ -189,7 +189,7 @@
 
     $scope.gridColumns = [
       {
-        "label": "Name",
+        "label": "姓名",
         "map": "name",
         "cellTemplate": '<img ng-src="{{dataRow.gravatar_url}}" height="40px"/> <a href="users/{{dataRow.id}}">{{dataRow.name}}</a>'
       },
