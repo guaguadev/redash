@@ -581,7 +581,15 @@
       this.query = query;
 
       this.parseQuery = function() {
-        var parts = Mustache.parse(this.query.query);
+        var parts;
+        try{
+          parts = Mustache.parse(this.query.query);
+        } catch(exception) {
+        }
+        if (!parts) {
+          return [];
+        }
+        
         var parameters = [];
         var collectParams = function(parts) {
           parameters = [];
