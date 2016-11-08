@@ -638,6 +638,13 @@
             }]
           })
         }
+
+        scope.keyup = function(e) {
+          var keycode = window.event ? e.keyCode : e.which;
+          if (keycode === 13) {
+            $scope.$broadcast('update-common-params');
+          }
+        }
       }
     }
   }]);
