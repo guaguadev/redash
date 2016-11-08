@@ -642,7 +642,15 @@
         scope.keyup = function(e) {
           var keycode = window.event ? e.keyCode : e.which;
           if (keycode === 13) {
-            scope.$broadcast('update-common-params');
+            var eventRoot = scope;
+            if (eventRoot.$parent !== null && eventRoot.$parent.$parent !== null) {
+              while (eventRoot.$parent.$parent.$parent === null || eventRoot.$parent.$parent.$parent !== eventRoot.$root) {
+                eventRoot = eventRoot.$parent;
+              }
+            }
+            if (eventRoot.$parent.$parent.$parent === eventRoot.$root) {
+              eventRoot.$broadcast('update-common-params');
+            }
           }
         }
       }
