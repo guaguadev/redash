@@ -10,8 +10,9 @@ from redash.utils import JSONEncoder
 
 logger = logging.getLogger(__name__)
 
+
 class Sqlite(BaseSQLQueryRunner):
-    noop_query = "SELECT 1"
+    noop_query = "pragma quick_check"
 
     @classmethod
     def configuration_schema(cls):

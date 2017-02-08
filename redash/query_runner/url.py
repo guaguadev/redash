@@ -1,12 +1,8 @@
-import sys
-import urllib2
-
-from redash.query_runner import *
+import requests
+from redash.query_runner import BaseQueryRunner, register
 
 
 class Url(BaseQueryRunner):
-    noop_query = ""
-
     @classmethod
     def configuration_schema(cls):
         return {
@@ -22,6 +18,9 @@ class Url(BaseQueryRunner):
     @classmethod
     def annotate_query(cls):
         return False
+
+    def test_connection(self):
+        pass
 
     def run_query(self, query, user):
         base_url = self.configuration.get("url", None)
@@ -39,20 +38,19 @@ class Url(BaseQueryRunner):
 
             url = base_url + query
 
-            json_data = urllib2.urlopen(url).read().strip()
+            response = requests.get(url)
+            response.raise_for_status()
+            json_data = response.content.strip()
 
             if not json_data:
-                error = "Error reading data from '%s'" % url
+                error = "Got empty response from '{}'.".format(url)
 
             return json_data, error
-
-        except urllib2.URLError as e:
+        except requests.RequestException as e:
             return None, str(e)
         except KeyboardInterrupt:
             error = "Query cancelled by user."
             json_data = None
-        except Exception as e:
-            raise sys.exc_info()[1], None, sys.exc_info()[2]
 
         return json_data, error
 
