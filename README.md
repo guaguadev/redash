@@ -1,3 +1,7 @@
+### merge remote response
+git fetch upstream
+git merge upstream/master
+
 More details about the future of re:dash : http://bit.ly/journey-first-step
 
 ---
