@@ -1,12 +1,12 @@
-upstream rd_servers {
-  server 127.0.0.1:5000;
+upstream rd_test_servers {
+  server 127.0.0.1:6000;
 }
 
 server {
 
   server_tokens off;
 
-  listen 80 default;
+  listen 8080 default;
 
   access_log /var/log/nginx/rd.access.log;
 
@@ -19,6 +19,6 @@ server {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass       http://rd_servers;
+    proxy_pass       http://rd_test_servers;
   }
 }

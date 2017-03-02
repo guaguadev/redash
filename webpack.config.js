@@ -6,7 +6,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 var path = require('path');
 
-var redashBackend = process.env.REDASH_BACKEND || 'http://localhost:5000';
+var redashBackend = process.env.REDASH_BACKEND || 'http://localhost:6000';
 
 var config = {
   entry: {
